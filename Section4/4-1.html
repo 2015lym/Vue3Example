@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div :class="{'red-div': isRed}">Class绑定对象</div>
+    <div :class="classObject">Class绑定计算属性</div>
+    <div :class="[redClass, whiteClass]">Class绑定数组1</div>
+    <div :class="[{'bold-text': isBold}, redClass]">Class绑定数组2</div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          isRed: true,
+          isWhite: true,
+          isBold: true,
+          redClass: 'red-div',
+          whiteClass: 'white-text'
+        }
+      },
+      computed: {
+        classObject() {
+          console.log('可以在这里写一些逻辑代码');
+          return {
+            'red-div': this.isRed,
+            'white-text': this.isWhite
+          }
+        }
+      },
+      methods: {
+      }
+    }).mount('#app')
+  </script>
+
+  <style>
+    .red-div {
+      background-color: red;
+    }
+    .white-text {
+      color: white;
+    }
+    .bold-text {
+      font-weight: bold;
+    }
+  </style>
+</body>
+
+</html>

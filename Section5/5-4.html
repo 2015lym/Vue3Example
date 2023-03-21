@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h2>Watch 深层侦听 Demo</h2>
+      <div>
+        <label>First Name：</label>
+        <input v-model="userInfo.firstName" />
+      </div>
+      <div>
+        <label>Last Name：</label>
+        <input v-model="userInfo.lastName" />
+      </div>
+      <button @click="changeUserInfo">修改用户信息</button>
+    </div>
+
+    <div>
+      <h2>Watch 即时回调 Demo</h2>
+      <div>
+        <label>Count：</label>
+        <input v-model="count" />
+      </div>
+      <div>
+        <label>Double Count：</label>
+        <span>{{ doubleCount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          userInfo: {
+            firstName: 'Arthur',
+            lastName: 'Morgan'
+          },
+          count: 1,
+          doubleCount: 1
+        }
+      },
+      watch: {
+        userInfo: {
+          handler(newVal, oldVal) {
+            console.log(`旧的值为：${JSON.stringify(oldVal)}`)
+            console.log(`新的值为：${JSON.stringify(newVal)}`)
+          },
+          deep: true
+        },
+        count: {
+          immediate: true,
+          handler(newVal, oldVal) {
+            this.doubleCount = newVal * 2
+          }
+        }
+      },
+      methods: {
+        changeUserInfo() {
+          this.userInfo.firstName = 'John'
+          this.userInfo.lastName = 'Marston'
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

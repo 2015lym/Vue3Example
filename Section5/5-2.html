@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>姓名：{{userInfo.name}}</div>
+    <div>是否成年：{{ userInfo.age >= 18 ? '已成年': '未成年'}}</div>
+    <div>是否成年：{{ isAdult }}</div>
+
+    <div>{{ fullName }}</div>
+    <button @click="changeFullName">修改fullName</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          userInfo: {
+            name: '张三',
+            age: 17
+          },
+          firstName: 'Elon',
+          lastName: 'Musk'
+        }
+      },
+      computed: {
+        isAdult() {
+          return this.userInfo.age > 18 ? '已成年' : '未成年'
+        },
+        fullName: {
+          caches: false,
+          get() {
+            return this.firstName + ' ' + this.lastName
+          },
+          set(newValue) {
+            const parts = newValue.split(' ')
+            this.firstName = parts[0]
+            this.lastName = parts[1]
+          }
+        }
+      },
+      methods: {
+        changeFullName() {
+          this.fullName = 'Steve Jobs'
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div :style="{'font-size': fontSize}">Style绑定对象1</div>
+    <div :style="styleObject">Style绑定对象2</div>
+
+    <div :style="[styleObject, backColor]">Style绑定数组</div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          fontSize: '14px',
+          styleObject: {
+            'font-size': '17px',
+            color: 'red'
+          },
+          backColor: {
+            'background-color': 'blue'
+          }
+        }
+      },
+    }).mount('#app')
+  </script>
+
+</body>
+
+</html>

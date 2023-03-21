@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="handleClick">声明方法 {{count}}</button>
+    <br>
+    <span>姓名：{{userInfo.name}} 年龄：{{userInfo.age}}</span>
+    <button @click="changeUserInfo">深层响应</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          count: 1,
+          userInfo: {
+            name: '张三',
+            age: 18
+          }
+        }
+      },
+      methods: {
+        // 正确写法
+        handleClick() {
+          this.count++
+          console.log('count=' + this.count)
+        },
+        // 错误写法
+        // handleClick: () => { 
+        //   this.count++
+        //   console.log('count=' + this.count)
+        // },
+        changeUserInfo() {
+          this.userInfo.name = '李四';
+          this.userInfo.age = 20;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
