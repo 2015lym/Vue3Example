@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Todo List</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@next"></script>
+  
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .list {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      width: 30%;
+    }
+
+    .list-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .list-item {
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      padding: 10px;
+      user-select: none;
+    }
+
+    .list-item:hover {
+      background-color: #e0e0e0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <div class="list" @dragover.prevent @drop="onDrop('todo')">
+        <div class="list-header">Todo</div>
+        <ul>
+          <li v-for="item in todo" :key="item.id" class="list-item" draggable="true" @dragstart="onDragStart(item)">
+            {{ item.title }}
+          </li>
+        </ul>
+      </div>
+      <div class="list" @dragover.prevent @drop="onDrop('doing')">
+        <div class="list-header">Doing</div>
+        <ul>
+          <li v-for="item in doing" :key="item.id" class="list-item" draggable="true" @dragstart="onDragStart(item)">
+            {{ item.title }}
+          </li>
+        </ul>
+      </div>
+      <div class="list" @dragover.prevent @drop="onDrop('done')">
+        <div class="list-header">Done</div>
+        <ul>
+          <li v-for="item in done" :key="item.id" class="list-item" draggable="true" @dragstart="onDragStart(item)">
+            {{ item.title }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          items: [
+            { id: 1, title: 'item 1', status: 'todo' },
+            { id: 2, title: 'item 2', status: 'todo' },
+            { id: 3, title: 'item 3', status: 'doing' },
+            { id: 4, title: 'item 4', status: 'done' },
+          ]
+        }
+      },
+      computed: {
+        todo() {
+          return this.items.filter(item => item.status === 'todo')
+        },
+        doing() {
+          return this.items.filter(item => item.status === 'doing')
+        },
+        done() {
+          return this.items.filter(item => item.status === 'done')
+        },
+      },
+      methods: {
+        onDragStart(item) {
+          event.dataTransfer.setData('item', JSON.stringify(item))
+        },
+        onDrop(status) {
+          const item = JSON.parse(event.dataTransfer.getData('item'))
+          item.status = status
+          this.items.forEach((element, i) => {
+            if (item.id == element.id) {
+              this.items[i] = item;
+            }
+          });
+        },
+      },
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
