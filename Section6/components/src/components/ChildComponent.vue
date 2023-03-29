@@ -3,42 +3,31 @@ import { onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, o
 
 
 export default {
-  data() {
-    return {
-      text: '',
-      displayText: ''
-    }
-  },
-  methods: {
-    showText() {
-      this.displayText = this.text
-    }
-  },
   setup(props, context) {
     console.log('setup')
     onBeforeMount(() => {
-      console.log('onBeforeMount 组件即将挂载到页面');
+      console.log('onBeforeMount 子组件即将挂载到页面');
     });
     onMounted(() => {
-      console.log('onMounted 组件已经挂载到页面');
+      console.log('onMounted 子组件已经挂载到页面');
     });
     onBeforeUpdate(() => {
-      console.log('onBeforeUpdate 组件即将更新');
+      console.log('onBeforeUpdate 子组件即将更新');
     });
     onUpdated(() => {
-      console.log('onUpdated 组件已经更新');
+      console.log('onUpdated 子组件已经更新');
     });
     onBeforeUnmount(() => {
-      console.log('onBeforeUnmount 组件即将卸载');
+      console.log('onBeforeUnmount 子组件即将卸载');
     });
     onUnmounted(() => {
-      console.log('onUnmounted 组件已经卸载');
+      console.log('onUnmounted 子组件已经卸载');
     });
     onActivated(() => {
-      console.log('onActivated 组件被激活');
+      console.log('onActivated 子组件被激活');
     });
     onDeactivated(() => {
-      console.log('onDeactivated 组件被停用');
+      console.log('onDeactivated 子组件被停用');
     });
     onErrorCaptured((error, vm, info) => {
       console.log('onErrorCaptured')
@@ -52,16 +41,10 @@ export default {
 
 <template>
   <div>
-    <input v-model="text" />
-    <button @click="showText">显示</button>
-    <div v-if="displayText">{{ displayText }}</div>
-    <ChildComponent />
+    我是子组件
   </div>
 </template>
 
 <style>
-button {
-  margin-left: 10px;
-}
 </style>
 
