@@ -13,6 +13,7 @@
 
   <main>
     <ParentComponent />
+    <SiblingComponent />
   </main>
 </template>
 

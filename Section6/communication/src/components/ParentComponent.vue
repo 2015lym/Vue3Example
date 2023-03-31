@@ -9,12 +9,14 @@
 
 <script lang="ts">
 import { ref } from 'vue';
+import bus from '@/event-bus';
 
 export default {
   setup() {
     const message = ref('无');
     const changeMessage = () => {
       message.value = '父组件发出了新消息!';
+      bus.emit('event', 'Hello, World!');
     };
     const handleEventMessage = (messageValue: string) => {
       message.value = messageValue;
