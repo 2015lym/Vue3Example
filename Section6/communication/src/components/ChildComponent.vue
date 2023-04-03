@@ -3,6 +3,7 @@
     <h2>子组件</h2>
     <p>当前消息：{{ message }}</p>
     <button @click="sendMessage">发送消息</button>
+    <GrandsonComponent />
   </div>
 </template>
 

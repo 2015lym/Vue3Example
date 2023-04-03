@@ -12,16 +12,14 @@ import bus from '@/event-bus';
 export default defineComponent({
   setup() {
     let state = reactive({
-      message: '123',
+      message: '',
     });
     onMounted(() => {
-      bus.on('event', (msg:string):void => {
-        console.log('event received');
-        state.message = msg;
+      bus.on('event', (msg): void => {
+        console.log('兄弟组件收到消息');
+        state.message = msg as string;
       });
     });
-    
-
     return {
       state
     };

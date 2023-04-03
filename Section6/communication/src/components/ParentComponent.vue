@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import bus from '@/event-bus';
 
 export default {
@@ -16,11 +16,13 @@ export default {
     const message = ref('无');
     const changeMessage = () => {
       message.value = '父组件发出了新消息!';
-      bus.emit('event', 'Hello, World!');
+      bus.emit('event', '给兄弟组件发出了新消息！');
     };
     const handleEventMessage = (messageValue: string) => {
       message.value = messageValue;
     };
+    // Provide 传值
+    provide('provide', 'Provide 传值了');
     return {
       message,
       changeMessage,
