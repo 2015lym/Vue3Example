@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="number-keyboard">
+        <button v-for="item in items" :key="item" 
+          @click="handleClick(item)" class="button-margin"
+          :class="{ 'button-selected': isSelected(item) }">
+          {{ item }}
+        </button>
+      </div>
+      <div class="display-div">结果：{{displayText}}</div>
+    </div>
+    <script>
+      const { createApp } = Vue
+      createApp({
+        data() {
+          return {
+            items: [1, 2, 3, '÷', 4, 5, 6, '×', 7, 8, 9, '-', 'C', 0, '=', '+'],
+            displayText: '',
+            selectedButton: null
+          }
+        },
+        methods: {
+          handleClick(item) {
+            this.selectedButton = item
+            if (item === 'C') {
+              this.displayText = ''
+            } else if (item === '=') {
+              // 判断最后一个字符是否为符号，如果是则删除
+              if (['+', '-', '×', '÷'].includes(this.displayText.slice(-1))) {
+                this.displayText = this.displayText.slice(0, -1)
+              }
+              // 使用eval计算表达式结果，并将结果赋值给displayText
+              var code = this.displayText.replace('×', '*').replace('÷', '/')
+              this.displayText = eval(code).toString()
+            } else {
+              // 拼接数字和运算符
+              const lastChar = this.displayText.slice(-1);
+              if (['+', '-', '×', '÷'].includes(lastChar) &&
+                  ['+', '-', '×', '÷'].includes(item)) {
+                this.displayText = this.displayText.slice(0, this.displayText.length - 1) + item
+              } else {
+                this.displayText += item
+              }
+            }
+          },
+          isSelected(item) {
+            return this.selectedButton === item
+          }
+        },
+      }).mount('#app')
+    </script>
+    <style>
+      .number-keyboard {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 10px;
+        width: 248px;
+        height: 240px;
+        background-color: #dadada;
+      }
+      .button-margin {
+        margin: 5px;
+        font-size: 18px;
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+        background-color: #eee;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+      }
+      .button-selected {
+        background-color: #3498db;
+        color: #fff;
+      }
+      .display-div {
+        width: 248px;
+        height: 40px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </body>
+</html>
