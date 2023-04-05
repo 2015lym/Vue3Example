@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- v-if 使用 -->
+    <div v-if="myColor == 'blue'">蓝</div>
+    <div v-else-if="myColor == 'green'">绿</div>
+    <div v-else-if="myColor == 'red'">红</div>
+    <div v-else>其他颜色</div>
+
+    <!-- v-show 使用 -->
+    <div v-show="myColor == 'blue'">蓝</div>
+    <div v-show="myColor == 'red'">红</div>
+
+    <!-- v-for 使用 -->
+    <div v-for="fruit in fruits">
+      {{fruit}}
+    </div>
+    <div v-for="(fruit, index) in fruits">
+      {{index + 1 + fruit}}
+    </div>
+
+    <!-- v-text 使用 -->
+    <div>{{name}}</div>
+    <div v-text="name">我不会被显示</div>
+
+    <!-- v-pre 使用 -->
+    <div v-pre>{{name}}</div>
+
+    <!-- v-cloak 使用 -->
+    <div v-cloak>
+      {{ name }}
+    </div>
+
+    <!-- v-html 使用 -->
+    <div v-html="html1"></div>
+    <div v-html="html2"></div>
+
+    <!-- v-once 使用 -->
+    <div>年龄: {{age}}</div>
+    <div v-once>年龄: {{age}}</div>
+    <button @click="addAge">增加年龄</button>
+
+    <!-- v-on 使用 -->
+    <button v-on:click="reduceAge">减少年龄</button>
+    <!-- 我只会生效一次 -->
+    <button v-on:click.once="reduceAge">减少年龄</button>
+    <br />
+    <input @keyup.enter="onEnter" />
+    
+    <!-- v-bind 使用 -->
+    <div v-bind:class="{'red-div': myColor == 'blue'}">v-bind绑定class</div>
+    <div :class="{'red-div': isRed}">v-bind绑定class简写</div>
+
+    <img :src="imageUrl" :style="{width: size + 'px'}" />
+
+
+  </div>
+
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          myColor: 'blue',
+          fruits: ['苹果', '菠萝', '椰子'],
+          name: '张三',
+          html1: '<h2>你好世界</h2>',
+          html2: '<h2>{{name}}</h2>',
+          age: 18,
+          isRed: true,
+          imageUrl: 'https://avatars.githubusercontent.com/u/16334445',
+          size: 50
+        }
+      },
+      methods: {
+        addAge() {
+          this.age++
+        },
+      reduceAge() {
+        this.age--
+      },
+      onEnter(event) {
+        console.log('我输入的是:', event.target.value)
+      }
+      }
+    }).mount('#app')
+  </script>
+
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    .red-div {
+      background-color: red;
+    }
+  </style>
+</body>
+
+</html>
