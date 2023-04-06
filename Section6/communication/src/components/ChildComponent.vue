@@ -7,24 +7,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  props: {
-    message: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props, { emit }) {
-    const sendMessage = () => {
-      const message = '子组件发出了新消息!';
-      emit('eventMessage', message);
-    };
-    return {
-      sendMessage,
-    };
-  },
-});
+<script setup lang="ts">
+import { defineProps, toRefs } from 'vue';
+const props = defineProps({
+  message: {
+    type: String,
+    required: true
+  }
+})
+const message = toRefs(props)
+const emit = defineEmits(['eventMessage'])
+const sendMessage = () => {
+  const message = '子组件发出了新消息!';
+  emit('eventMessage', message);
+};
+// return {
+//   sendMessage,
+// };
 </script>
