@@ -2,6 +2,10 @@
   <div class="container">
     <div class="list" @dragover.prevent @drop="onDrop('todo')">
       <div class="list-header">Todo</div>
+      <div class="add-task">
+      <input type="text" v-model="newTask" placeholder="Add new task" />
+      <button @click="addTask">Add</button>
+    </div>
       <ul>
         <li v-for="item in todo" :key="item.id" class="list-item" draggable="true" @dragstart="onDragStart(item)">
           {{ item.title }}
@@ -29,13 +33,11 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-
 interface Item {
   id: number;
   title: string;
   status: 'todo' | 'doing' | 'done';
 }
-
 export default ({
   name: 'TaskBoard',
   setup() {
@@ -45,11 +47,9 @@ export default ({
       { id: 3, title: 'item 3', status: 'doing' },
       { id: 4, title: 'item 4', status: 'done' },
     ]);
-
     const todo = ref<Item[]>([]);
     const doing = ref<Item[]>([]);
     const done = ref<Item[]>([]);
-
     items.value.forEach(item => {
       if (item.status === 'todo') {
         todo.value.push(item);
@@ -59,11 +59,9 @@ export default ({
         done.value.push(item);
       }
     });
-
     const onDragStart = (item: Item) => {
       event?.dataTransfer?.setData('item', JSON.stringify(item));
     };
-
     const onDrop = (status: 'todo' | 'doing' | 'done') => {
       const item = JSON.parse(event?.dataTransfer?.getData('item') || '{}');
       item.status = status;
@@ -75,7 +73,6 @@ export default ({
       doing.value = items.value.filter(item => item.status === 'doing');
       done.value = items.value.filter(item => item.status === 'done');
     };
-
     return {
       todo,
       doing,
@@ -93,20 +90,17 @@ export default ({
   justify-content: flex-start;
   width: 100%;
 }
-
 .list {
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   width: 30%;
 }
-
 .list-header {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
-
 .list-item {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
@@ -116,7 +110,6 @@ export default ({
   padding: 10px;
   user-select: none;
 }
-
 .list-item:hover {
   background-color: #e0e0e0;
 }
