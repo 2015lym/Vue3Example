@@ -7,10 +7,32 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      children: [
+        {
+          name: 'dashboard',
+          path: '/',
+          component: () => import('../views/Dashboard.vue')
+        },
+        {
+          name: 'profile',
+          path: '/Profile',
+          component: () => import('../views/Profile.vue')
+        },
+        {
+          name: 'params',
+          path: '/Params/',
+          component: () => import('../views/ParamsView.vue')
+        },
+        {
+          name: 'query',
+          path: '/Query',
+          component: () => import('../views/QueryView.vue')
+        }
+      ]
     },
     {
-      path: '/about',
+      path: '/about/:id',
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
