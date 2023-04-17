@@ -34,12 +34,29 @@ const router = createRouter({
     {
       path: '/about/:id',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     }
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  // to: 即将要进入的目标路由对象
+  console.log(to)
+  // from: 当前导航正要离开的路由对象
+  console.log(from)
+  // next: 必须被调用才能进入下一个钩子，否则路由不会切换
+  next();
+})
+
+router.beforeResolve((to, from, next) => {
+  // 在路由解析组件之前执行一些操作
+  console.log('开始解析了')
+  console.log(`Navigated to ${to.fullPath} from ${from.fullPath}`)
+  next();
+})
+
+router.afterEach((to, from) => {
+  console.log('后置守卫生效')
+  console.log(`Navigated to ${to.fullPath} from ${from.fullPath}`)
+})
 export default router
