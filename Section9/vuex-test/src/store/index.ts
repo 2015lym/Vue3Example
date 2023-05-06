@@ -1,4 +1,5 @@
 import { createStore, Store } from 'vuex'
+import createPersistedState from "vuex-persistedstate"
 
 interface State {
   count: number
@@ -32,7 +33,8 @@ const store: Store<State> = createStore<State>({
   state,
   getters,
   mutations,
-  actions
+  actions,
+  plugins: [createPersistedState()]
 })
 
 export default store
