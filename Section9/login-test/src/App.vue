@@ -1,3 +1,21 @@
+<template>
+  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+      <el-button @click="showLoginModal">登录</el-button>
+
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>
+  <LoginModal v-model:visible="loginModalVisible" />
+  <RouterView />
+</template>
+
 <script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
@@ -11,37 +29,17 @@ export default defineComponent({
   },
   setup() {
     const loginModalVisible = ref(false);
-
     const showLoginModal = () => {
-      console.log('333')
       loginModalVisible.value = true;
     };
 
     return {
       loginModalVisible,
-      showLoginModal,
+      showLoginModal
     };
   },
 });
 </script>
-
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <el-button @click="showLoginModal">登录</el-button>
-      
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-  <login-modal :visible.sync="loginModalVisible"></login-modal>
-  <RouterView />
-</template>
 
 <style scoped>
 header {
