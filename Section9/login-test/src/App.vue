@@ -1,10 +1,17 @@
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img
+      alt="Vue logo"
+      class="logo"
+      src="@/assets/logo.svg"
+      width="125"
+      height="125"
+    />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-      <el-button @click="showLoginModal">登录</el-button>
+      <HelloWorld :msg="'登录状态' + login" />
+      <el-button @click="showLoginModal" type="primary">登录</el-button>
+      <el-button @click="logout" type="danger">退出登录</el-button>
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
@@ -19,8 +26,9 @@
 <script lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
-import LoginModal from "./components/LoginModal.vue";
-import { defineComponent, ref } from "vue";
+import LoginModal from './components/LoginModal.vue'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: {
@@ -28,17 +36,26 @@ export default defineComponent({
     LoginModal,
   },
   setup() {
-    const loginModalVisible = ref(false);
+    const store = useStore()
+    const loginModalVisible = ref(false)
+    const login = computed(() => store.state.isLoggedIn)
     const showLoginModal = () => {
-      loginModalVisible.value = true;
-    };
+      loginModalVisible.value = true
+    }
+    const logout = () => {
+      store.commit('setLoggedIn', false)
+      localStorage.removeItem('username')
+      localStorage.removeItem('password')
+    }
 
     return {
       loginModalVisible,
-      showLoginModal
-    };
+      showLoginModal,
+      login,
+      logout,
+    }
   },
-});
+})
 </script>
 
 <style scoped>

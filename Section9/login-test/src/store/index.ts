@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate"
 
 interface State {
   isLoggedIn: boolean;
@@ -17,4 +18,5 @@ export default createStore({
   },
   actions: {},
   modules: {},
+  plugins: [createPersistedState()]
 });
