@@ -1,14 +1,13 @@
 <template>
-  <el-card>
-    <div class="user-info-card">
-      <div class="avatar">
-        <img :src="user.avatar" alt="Avatar">
-      </div>
-      <div class="user-details">
-        <h3>{{ user.name }}</h3>
-        <p>{{ user.email }}</p>
-        <p>Age: {{ user.age }}</p>
-      </div>
+  <el-card :body-style="{ display: 'flex', 'align-items': 'center', 'font-size': '20px' }">
+    <div class="avatar">
+      <img src="@/assets/avatar.jpg" alt="Avatar">
+    </div>
+    <div class="user-details">
+      <h3>{{ user.name }}</h3>
+      <p>{{ user.email }}</p>
+      <p>年龄: {{ user.age }}</p>
+      <p>分数: {{ user.score }}</p>
     </div>
   </el-card>
 </template>
@@ -19,23 +18,21 @@ interface User {
   name: string;
   email: string;
   age: number;
-  avatar: string;
+  score: number;
 }
 
 const user = ref<User>({
   name: '张三',
   email: 'zhangsan@example.com',
   age: 28,
-  avatar: 'https://avatars.githubusercontent.com/u/16334445?v=4',
+  score: 99
 });
 </script>
 
 <style scoped>
 .user-info-card {
   height: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
+
 }
 
 .avatar img {

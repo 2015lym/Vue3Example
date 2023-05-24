@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import { ElMessage } from 'element-plus'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,28 +13,44 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/Login.vue')
     },
     {
       path: '/userlist',
       name: 'userlist',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/UserList.vue')
     },
     {
       path: '/userinfo',
       name: 'userinfo',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/UserInfo.vue')
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  const username = localStorage.getItem('username')
+  if (!username && to.fullPath == '/userinfo') {
+    ElMessage.error('你还没有登录，请先登录')
+    next('/login')
+  } else {
+    next();
+  }
+})
+
+router.beforeResolve((to, from, next) => {
+  console.log('开始解析了')
+  next();
+})
+
+router.afterEach((to, from) => {
+  console.log('后置守卫生效')
+  console.log(`Navigated to ${to.fullPath} from ${from.fullPath}`)
 })
 
 export default router
