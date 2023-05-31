@@ -1,6 +1,6 @@
 <template>
   <div class="add-task">
-    <input type="text" v-model="taskTitle" @keyup.enter="addTask" placeholder="Enter task title" />
+    <input type="text" v-model="taskTitle" @keyup.enter="addTask" placeholder="输入待办项" />
     <button @click="addTask">添加</button>
   </div>
 </template>
