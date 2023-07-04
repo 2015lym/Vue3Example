@@ -6,11 +6,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, ref } from 'vue';
+import request from '@/config/axios'
 
 export default defineComponent({
   setup() {
-    const provideValue = inject<string>('provide');
+    let provideValue = ref();
+    request.get({ url: 'http://localhost:3000/users' }).then(response => {
+      console.log(response)
+      provideValue.value = response[0].name
+    }).catch(error => {
+      console.error(error);
+    });
+    
+
     return {
       provideValue
     };
