@@ -10,27 +10,10 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard/analysis',
+    redirect: '/asset/AssetOverview',
     name: 'Root',
     meta: {
       hidden: true
-    }
-  },
-  {
-    path: '/redirect',
-    component: Layout,
-    name: 'Redirect',
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        name: 'Redirect',
-        component: () => import('@/views/Redirect/Redirect.vue'),
-        meta: {}
-      }
-    ],
-    meta: {
-      hidden: true,
-      noTagsView: true
     }
   },
   {
@@ -57,492 +40,210 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
-    path: '/dashboard',
+    path: '/Asset',
     component: Layout,
-    redirect: '/dashboard/analysis',
-    name: 'Dashboard',
+    redirect: '/Asset/AssetOverview',
+    name: 'Asset',
     meta: {
-      title: t('router.dashboard'),
+      title: '资产盘点',
       icon: 'ant-design:dashboard-filled',
       alwaysShow: true
     },
     children: [
       {
-        path: 'analysis',
+        path: 'AssetOverview',
         component: () => import('@/views/Asset/AssetOverview.vue'),
-        name: 'Analysis',
+        name: 'AssetOverview',
         meta: {
-          title: '123',
+          title: '资产概况',
           noCache: true,
           affix: true
         }
       },
       {
-        path: 'workplace',
-        component: () => import('@/views/Dashboard/Workplace.vue'),
-        name: 'Workplace',
+        path: 'DataAnalysis',
+        component: () => import('@/views/Asset/DataAnalysis.vue'),
+        name: 'DataAnalysis',
         meta: {
-          title: t('router.workplace'),
+          title: '数据分析',
           noCache: true
         }
       }
     ]
   },
   {
-    path: '/external-link',
+    path: '/Product',
     component: Layout,
-    meta: {},
-    name: 'ExternalLink',
-    children: [
-      {
-        path: 'https://element-plus-admin-doc.cn/',
-        name: 'DocumentLink',
-        meta: {
-          title: t('router.document'),
-          icon: 'clarity:document-solid'
-        }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    name: 'Guide',
-    meta: {},
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/Guide/Guide.vue'),
-        name: 'GuideDemo',
-        meta: {
-          title: t('router.guide'),
-          icon: 'cib:telegram-plane'
-        }
-      }
-    ]
-  },
-  {
-    path: '/components',
-    component: Layout,
-    name: 'ComponentsDemo',
+    redirect: '/Product/ProductSearch',
+    name: 'Product',
     meta: {
-      title: t('router.component'),
+      title: '商品管理',
       icon: 'bx:bxs-component',
       alwaysShow: true
     },
     children: [
       {
-        path: 'form',
-        component: getParentLayout(),
-        redirect: '/components/form/default-form',
-        name: 'Form',
+        path: 'ProductSearch',
+        component: () => import('@/views/Product/ProductSearch.vue'),
+        name: 'ProductSearch',
         meta: {
-          title: t('router.form'),
-          alwaysShow: true
-        },
-        children: [
-          {
-            path: 'default-form',
-            component: () => import('@/views/Components/Form/DefaultForm.vue'),
-            name: 'DefaultForm',
-            meta: {
-              title: t('router.defaultForm')
-            }
-          },
-          {
-            path: 'use-form',
-            component: () => import('@/views/Components/Form/UseFormDemo.vue'),
-            name: 'UseForm',
-            meta: {
-              title: 'UseForm'
-            }
-          },
-          {
-            path: 'ref-form',
-            component: () => import('@/views/Components/Form/RefForm.vue'),
-            name: 'RefForm',
-            meta: {
-              title: 'RefForm'
-            }
-          }
-        ]
-      },
-      {
-        path: 'table',
-        component: getParentLayout(),
-        redirect: '/components/table/default-table',
-        name: 'TableDemo',
-        meta: {
-          title: t('router.table'),
-          alwaysShow: true
-        },
-        children: [
-          {
-            path: 'default-table',
-            component: () => import('@/views/Components/Table/DefaultTable.vue'),
-            name: 'DefaultTable',
-            meta: {
-              title: t('router.defaultTable')
-            }
-          },
-          {
-            path: 'use-table',
-            component: () => import('@/views/Components/Table/UseTableDemo.vue'),
-            name: 'UseTable',
-            meta: {
-              title: 'UseTable'
-            }
-          },
-          {
-            path: 'ref-table',
-            component: () => import('@/views/Components/Table/RefTable.vue'),
-            name: 'RefTable',
-            meta: {
-              title: 'RefTable'
-            }
-          }
-        ]
-      },
-      {
-        path: 'editor-demo',
-        component: getParentLayout(),
-        redirect: '/components/editor-demo/editor',
-        name: 'EditorDemo',
-        meta: {
-          title: t('router.editor'),
-          alwaysShow: true
-        },
-        children: [
-          {
-            path: 'editor',
-            component: () => import('@/views/Components/Editor/Editor.vue'),
-            name: 'Editor',
-            meta: {
-              title: t('router.richText')
-            }
-          }
-        ]
-      },
-      {
-        path: 'search',
-        component: () => import('@/views/Components/Search.vue'),
-        name: 'Search',
-        meta: {
-          title: t('router.search')
+          title: '商品查询',
+          noCache: true
         }
       },
       {
-        path: 'descriptions',
-        component: () => import('@/views/Components/Descriptions.vue'),
-        name: 'Descriptions',
+        path: 'ProductAdd',
+        component: () => import('@/views/Product/ProductAdd.vue'),
+        name: 'ProductAdd',
         meta: {
-          title: t('router.descriptions')
+          title: '商品添加',
+          noCache: true
         }
       },
       {
-        path: 'image-viewer',
-        component: () => import('@/views/Components/ImageViewer.vue'),
-        name: 'ImageViewer',
+        path: 'ProductEdit',
+        component: () => import('@/views/Product/ProductEdit.vue'),
+        name: 'ProductEdit',
         meta: {
-          title: t('router.imageViewer')
-        }
-      },
-      {
-        path: 'dialog',
-        component: () => import('@/views/Components/Dialog.vue'),
-        name: 'Dialog',
-        meta: {
-          title: t('router.dialog')
-        }
-      },
-      {
-        path: 'icon',
-        component: () => import('@/views/Components/Icon.vue'),
-        name: 'Icon',
-        meta: {
-          title: t('router.icon')
-        }
-      },
-      {
-        path: 'echart',
-        component: () => import('@/views/Components/Echart.vue'),
-        name: 'Echart',
-        meta: {
-          title: t('router.echart')
-        }
-      },
-      {
-        path: 'count-to',
-        component: () => import('@/views/Components/CountTo.vue'),
-        name: 'CountTo',
-        meta: {
-          title: t('router.countTo')
-        }
-      },
-      {
-        path: 'qrcode',
-        component: () => import('@/views/Components/Qrcode.vue'),
-        name: 'Qrcode',
-        meta: {
-          title: t('router.qrcode')
-        }
-      },
-      {
-        path: 'highlight',
-        component: () => import('@/views/Components/Highlight.vue'),
-        name: 'Highlight',
-        meta: {
-          title: t('router.highlight')
-        }
-      },
-      {
-        path: 'infotip',
-        component: () => import('@/views/Components/Infotip.vue'),
-        name: 'Infotip',
-        meta: {
-          title: t('router.infotip')
-        }
-      },
-      {
-        path: 'input-password',
-        component: () => import('@/views/Components/InputPassword.vue'),
-        name: 'InputPassword',
-        meta: {
-          title: t('router.inputPassword')
-        }
-      },
-      {
-        path: 'sticky',
-        component: () => import('@/views/Components/Sticky.vue'),
-        name: 'Sticky',
-        meta: {
-          title: t('router.sticky')
+          title: '商品编辑',
+          noCache: true
         }
       }
     ]
   },
   {
-    path: '/hooks',
+    path: '/Order',
     component: Layout,
-    redirect: '/hooks/useWatermark',
-    name: 'Hooks',
+    redirect: '/Order/OrderSearch',
+    name: 'Order',
     meta: {
-      title: 'hooks',
-      icon: 'ic:outline-webhook',
+      title: '订单管理',
+      icon: 'clarity:document-solid',
       alwaysShow: true
     },
     children: [
       {
-        path: 'useWatermark',
-        component: () => import('@/views/hooks/useWatermark.vue'),
-        name: 'UseWatermark',
+        path: 'OrderSearch',
+        component: () => import('@/views/Order/OrderSearch.vue'),
+        name: 'OrderSearch',
         meta: {
-          title: 'useWatermark'
-        }
-      },
-      {
-        path: 'useCrudSchemas',
-        component: () => import('@/views/hooks/useCrudSchemas.vue'),
-        name: 'UseCrudSchemas',
-        meta: {
-          title: 'useCrudSchemas'
+          title: '订单查询',
+          noCache: true
         }
       }
     ]
   },
   {
-    path: '/level',
+    path: '/Inventory',
     component: Layout,
-    redirect: '/level/menu1/menu1-1/menu1-1-1',
-    name: 'Level',
+    redirect: '/Inventory/InventorySearch',
+    name: 'Inventory',
     meta: {
-      title: t('router.level'),
-      icon: 'carbon:skill-level-advanced'
-    },
-    children: [
-      {
-        path: 'menu1',
-        name: 'Menu1',
-        component: getParentLayout(),
-        redirect: '/level/menu1/menu1-1/menu1-1-1',
-        meta: {
-          title: t('router.menu1')
-        },
-        children: [
-          {
-            path: 'menu1-1',
-            name: 'Menu11',
-            component: getParentLayout(),
-            redirect: '/level/menu1/menu1-1/menu1-1-1',
-            meta: {
-              title: t('router.menu11'),
-              alwaysShow: true
-            },
-            children: [
-              {
-                path: 'menu1-1-1',
-                name: 'Menu111',
-                component: () => import('@/views/Level/Menu111.vue'),
-                meta: {
-                  title: t('router.menu111')
-                }
-              }
-            ]
-          },
-          {
-            path: 'menu1-2',
-            name: 'Menu12',
-            component: () => import('@/views/Level/Menu12.vue'),
-            meta: {
-              title: t('router.menu12')
-            }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        name: 'Menu2',
-        component: () => import('@/views/Level/Menu2.vue'),
-        meta: {
-          title: t('router.menu2')
-        }
-      }
-    ]
-  },
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/example-dialog',
-    name: 'Example',
-    meta: {
-      title: t('router.example'),
-      icon: 'ep:management',
+      title: '库存管理',
+      icon: 'carbon:skill-level-advanced',
       alwaysShow: true
     },
     children: [
       {
-        path: 'example-dialog',
-        component: () => import('@/views/Example/Dialog/ExampleDialog.vue'),
-        name: 'ExampleDialog',
+        path: 'InventorySearch',
+        component: () => import('@/views/Inventory/InventorySearch.vue'),
+        name: 'InventorySearch',
         meta: {
-          title: t('router.exampleDialog')
+          title: '库存查询',
+          noCache: true
         }
       },
       {
-        path: 'example-page',
-        component: () => import('@/views/Example/Page/ExamplePage.vue'),
-        name: 'ExamplePage',
+        path: 'InventoryAdd',
+        component: () => import('@/views/Inventory/InventoryAdd.vue'),
+        name: 'InventoryAdd',
         meta: {
-          title: t('router.examplePage')
+          title: '库存添加',
+          noCache: true
         }
       },
       {
-        path: 'example-add',
-        component: () => import('@/views/Example/Page/ExampleAdd.vue'),
-        name: 'ExampleAdd',
+        path: 'InventoryEdit',
+        component: () => import('@/views/Inventory/InventoryEdit.vue'),
+        name: 'InventoryEdit',
         meta: {
-          title: t('router.exampleAdd'),
-          noTagsView: true,
-          noCache: true,
-          hidden: true,
-          canTo: true,
-          activeMenu: '/example/example-page'
+          title: '库存编辑',
+          noCache: true
+        }
+      },
+    ]
+  },
+  {
+    path: '/User',
+    component: Layout,
+    redirect: '/User/UserManagement',
+    name: 'User',
+    meta: {
+      title: '用户管理',
+      icon: 'eos-icons:role-binding',
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'UserManagement',
+        component: () => import('@/views/User/UserManagement.vue'),
+        name: 'UserManagement',
+        meta: {
+          title: '注册登录',
+          noCache: true
         }
       },
       {
-        path: 'example-edit',
-        component: () => import('@/views/Example/Page/ExampleEdit.vue'),
-        name: 'ExampleEdit',
+        path: 'PermissionManagement',
+        component: () => import('@/views/User/PermissionManagement.vue'),
+        name: 'PermissionManagement',
         meta: {
-          title: t('router.exampleEdit'),
-          noTagsView: true,
-          noCache: true,
-          hidden: true,
-          canTo: true,
-          activeMenu: '/example/example-page'
-        }
-      },
-      {
-        path: 'example-detail',
-        component: () => import('@/views/Example/Page/ExampleDetail.vue'),
-        name: 'ExampleDetail',
-        meta: {
-          title: t('router.exampleDetail'),
-          noTagsView: true,
-          noCache: true,
-          hidden: true,
-          canTo: true,
-          activeMenu: '/example/example-page'
+          title: '权限管理',
+          noCache: true
         }
       }
     ]
   },
   {
-    path: '/error',
+    path: '/Message',
     component: Layout,
-    redirect: '/error/404',
-    name: 'Error',
+    redirect: '/Message/NotificationManagement',
+    name: 'Message',
     meta: {
-      title: t('router.errorPage'),
-      icon: 'ci:error',
+      title: '消息管理',
+      icon: 'cib:telegram-plane',
       alwaysShow: true
     },
     children: [
       {
-        path: '404-demo',
-        component: () => import('@/views/Error/404.vue'),
-        name: '404Demo',
+        path: 'NotificationManagement',
+        component: () => import('@/views/Message/NotificationManagement.vue'),
+        name: 'NotificationManagement',
         meta: {
-          title: '404'
+          title: '通知消息管理',
+          noCache: true
         }
       },
       {
-        path: '403-demo',
-        component: () => import('@/views/Error/403.vue'),
-        name: '403Demo',
+        path: 'ReportManagement',
+        component: () => import('@/views/Message/ReportManagement.vue'),
+        name: 'ReportManagement',
         meta: {
-          title: '403'
+          title: '举报消息管理',
+          noCache: true
         }
       },
       {
-        path: '500-demo',
-        component: () => import('@/views/Error/500.vue'),
-        name: '500Demo',
+        path: 'FeedbackManagement',
+        component: () => import('@/views/Message/FeedbackManagement.vue'),
+        name: 'FeedbackManagement',
         meta: {
-          title: '500'
+          title: '意见反馈管理',
+          noCache: true
         }
       }
     ]
-  }
-  // {
-  //   path: '/authorization',
-  //   component: Layout,
-  //   redirect: '/authorization/user',
-  //   name: 'Authorization',
-  //   meta: {
-  //     title: t('router.authorization'),
-  //     icon: 'eos-icons:role-binding',
-  //     alwaysShow: true
-  //   },
-  //   children: [
-  //     {
-  //       path: 'user',
-  //       component: () => import('@/views/Authorization/User.vue'),
-  //       name: 'User',
-  //       meta: {
-  //         title: t('router.user')
-  //       }
-  //     },
-  //     {
-  //       path: 'role',
-  //       component: () => import('@/views/Authorization/Role.vue'),
-  //       name: 'Role',
-  //       meta: {
-  //         title: t('router.role')
-  //       }
-  //     }
-  //   ]
-  // }
+  },
 ]
 
 const router = createRouter({
