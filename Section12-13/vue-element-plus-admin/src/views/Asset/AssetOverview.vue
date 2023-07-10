@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2>孙组件</h2>
-    <p>Project/Inject传值：{{ provideValue }}</p>
+    AssetOverview
   </div>
 </template>
 
