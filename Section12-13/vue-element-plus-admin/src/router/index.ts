@@ -176,7 +176,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/User',
     component: Layout,
-    redirect: '/User/UserManagement',
+    redirect: '/User/PermissionManagement',
     name: 'User',
     meta: {
       title: '用户管理',
@@ -184,15 +184,6 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       alwaysShow: true
     },
     children: [
-      {
-        path: 'UserManagement',
-        component: () => import('@/views/User/UserManagement.vue'),
-        name: 'UserManagement',
-        meta: {
-          title: '注册登录',
-          noCache: true
-        }
-      },
       {
         path: 'PermissionManagement',
         component: () => import('@/views/User/PermissionManagement.vue'),
