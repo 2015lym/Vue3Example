@@ -1,0 +1,21 @@
+{
+  "home": {
+    "project": 20,
+    "todo": 9,
+    "access": 1380,
+    "operation_record": [
+      {
+        "user": "管理员",
+        "content": "上架了新产品图书"
+      },
+      {
+        "user": "管理员",
+        "content": "修改了图书定价"
+      },
+      {
+        "user": "张三",
+        "content": "上架了新产品电脑"
+      }
+    ]
+  }
+}
