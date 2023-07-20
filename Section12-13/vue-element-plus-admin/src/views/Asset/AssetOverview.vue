@@ -1,77 +1,3 @@
-<script setup lang="ts">
-import { useTimeAgo } from '@/hooks/web/useTimeAgo'
-import { ElRow, ElCol, ElSkeleton, ElCard, ElDivider, ElLink } from 'element-plus'
-import PanelGroup from './components/PanelGroup.vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ref, reactive } from 'vue'
-import { CountTo } from '@/components/CountTo'
-import { Echart } from '@/components/Echart'
-import { EChartsOption } from 'echarts'
-import { radarOption } from './echarts-data'
-
-import { getRadarApi } from '@/api/dashboard/workplace'
-import { set } from 'lodash-es'
-import request from '@/config/axios'
-
-const loading = ref(true)
-
-// 获取数据
-let totalSate = reactive({
-  project: 0,
-  access: 0,
-  todo: 0
-})
-let dynamics = reactive([])
-
-const getCount = async () => {
-  const res = await request.get({ url: 'http://localhost:3000/home' })
-  if (res) {
-    totalSate.project = res.project || 0;
-    totalSate.todo = res.todo || 0;
-    totalSate.access = res.access || 0;
-    dynamics = res.operation_record || [];
-  }
-}
-
-// 获取指数
-let radarOptionData = reactive<EChartsOption>(radarOption) as EChartsOption
-
-const getRadar = async () => {
-  const res = await getRadarApi().catch(() => { })
-  if (res) {
-    set(
-      radarOptionData,
-      'radar.indicator',
-      res.data.map((v) => {
-        return {
-          name: t(v.name),
-          max: v.max
-        }
-      })
-    )
-    set(radarOptionData, 'series', [
-      {
-        name: '贡献指数',
-        type: 'radar',
-        data: [
-          { value: res.data.map((v) => v.personal), name: '个人' },
-          { value: res.data.map((v) => v.team), name: '团队' }
-        ]
-      }
-    ])
-  }
-}
-
-const getAllApi = async () => {
-  await Promise.all([getCount(), getRadar()])
-  loading.value = false
-}
-
-getAllApi()
-
-const { t } = useI18n()
-</script>
-
 <template>
   <div>
     <ElCard shadow="never">
@@ -154,3 +80,77 @@ const { t } = useI18n()
     </ElCol>
   </ElRow>
 </template>
+
+<script setup lang="ts">
+import { useTimeAgo } from '@/hooks/web/useTimeAgo'
+import PanelGroup from './components/PanelGroup.vue'
+import { useI18n } from '@/hooks/web/useI18n'
+import { ref, reactive } from 'vue'
+import { CountTo } from '@/components/CountTo'
+import { Echart } from '@/components/Echart'
+import { EChartsOption } from 'echarts'
+import { radarOption } from './echarts-data'
+
+import { getRadarApi } from '@/api/dashboard/workplace'
+import { set } from 'lodash-es'
+import request from '@/config/axios'
+
+const loading = ref(true)
+
+// 获取数据
+let totalSate = reactive({
+  project: 0,
+  access: 0,
+  todo: 0
+})
+let dynamics = reactive([])
+
+const getCount = async () => {
+  const res = await request.get({ url: 'http://localhost:3000/home' })
+  if (res) {
+    totalSate.project = res.project || 0;
+    totalSate.todo = res.todo || 0;
+    totalSate.access = res.access || 0;
+    dynamics = res.operation_record || [];
+  }
+}
+
+// 获取指数
+let radarOptionData = reactive<EChartsOption>(radarOption) as EChartsOption
+
+const getRadar = async () => {
+  const res = await getRadarApi().catch(() => { })
+  if (res) {
+    set(
+      radarOptionData,
+      'radar.indicator',
+      res.data.map((v) => {
+        return {
+          name: t(v.name),
+          max: v.max
+        }
+      })
+    )
+    set(radarOptionData, 'series', [
+      {
+        name: '贡献指数',
+        type: 'radar',
+        data: [
+          { value: res.data.map((v) => v.personal), name: '个人' },
+          { value: res.data.map((v) => v.team), name: '团队' }
+        ]
+      }
+    ])
+  }
+}
+
+const getAllApi = async () => {
+  await Promise.all([getCount(), getRadar()])
+  loading.value = false
+}
+
+getAllApi()
+
+const { t } = useI18n()
+</script>
+

@@ -154,15 +154,6 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: 'InventoryAdd',
-        component: () => import('@/views/Inventory/InventoryAdd.vue'),
-        name: 'InventoryAdd',
-        meta: {
-          title: '库存添加',
-          noCache: true
-        }
-      },
-      {
         path: 'InventoryEdit',
         component: () => import('@/views/Inventory/InventoryEdit.vue'),
         name: 'InventoryEdit',
@@ -198,7 +189,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/Message',
     component: Layout,
-    redirect: '/Message/NotificationManagement',
+    redirect: '/Message/MessageManagement',
     name: 'Message',
     meta: {
       title: '消息管理',
@@ -207,20 +198,11 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'NotificationManagement',
-        component: () => import('@/views/Message/NotificationManagement.vue'),
-        name: 'NotificationManagement',
+        path: 'MessageManagement',
+        component: () => import('@/views/Message/MessageManagement.vue'),
+        name: 'MessageManagement',
         meta: {
-          title: '通知消息管理',
-          noCache: true
-        }
-      },
-      {
-        path: 'ReportManagement',
-        component: () => import('@/views/Message/ReportManagement.vue'),
-        name: 'ReportManagement',
-        meta: {
-          title: '举报消息管理',
+          title: '消息分类管理',
           noCache: true
         }
       },

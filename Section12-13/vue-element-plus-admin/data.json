@@ -17,5 +17,140 @@
         "content": "上架了新产品电脑"
       }
     ]
-  }
+  },
+  "products": [
+    {
+      "id": 1,
+      "title": "JavaScript从入门到精通",
+      "author": "管理员",
+      "create_time": "2023-07-19 19:58:08",
+      "post": "包邮",
+      "price": 20,
+      "number": 200,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 2,
+      "title": "深入浅出设计模式",
+      "author": "张三",
+      "create_time": "2023-07-18 19:58:08",
+      "post": "包邮",
+      "price": 29,
+      "number": 90,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 3,
+      "title": "C语言程序设计",
+      "author": "张三",
+      "create_time": "2023-07-20 19:58:08",
+      "post": "12元",
+      "price": 50,
+      "number": 100,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 4,
+      "title": "C++程序设计",
+      "author": "管理员",
+      "create_time": "2023-07-21 21:30:00",
+      "post": "12元",
+      "price": 20,
+      "number": 120,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 5,
+      "title": "算法设计指南",
+      "author": "张三",
+      "create_time": "2023-07-20 20:00:00",
+      "post": "12元",
+      "price": 20,
+      "number": 3000,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 6,
+      "title": "算法导论",
+      "author": "管理员",
+      "create_time": "2023-07-18 19:00:00",
+      "post": "包邮",
+      "price": 20,
+      "number": 191,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 7,
+      "title": "深入理解计算机系统",
+      "author": "管理员",
+      "create_time": "2023-07-19 19:00:00",
+      "post": "包邮",
+      "price": 20,
+      "number": 333,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "id": 8,
+      "title": "代码整洁之道",
+      "author": "管理员",
+      "create_time": "2023-07-19 19:00:00",
+      "post": "包邮",
+      "price": 20,
+      "number": 221,
+      "description": "商品描述商品描述商品描述"
+    },
+    {
+      "title": "a啊啊啊",
+      "post": "包邮",
+      "create_time": "2023-07-20 01:59:29",
+      "author": "张三",
+      "description": "顶顶顶顶",
+      "price": 3,
+      "number": 240,
+      "id": 9
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "title": "深入浅出设计模式",
+      "user": "小李",
+      "create_time": "2023-07-19 19:58:08",
+      "post": "包邮",
+      "price": 29,
+      "address": "北京市朝阳区 xx街道"
+    },
+    {
+      "id": 1,
+      "title": "C语言程序设计",
+      "user": "小张",
+      "create_time": "2023-07-19 19:58:08",
+      "post": "包邮",
+      "price": 40,
+      "address": "辽宁省沈阳市大东区 xx街道"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "title": "你有新的任务，请及时处理",
+      "content": "库存不足，请补货",
+      "create_time": "2023-07-19 19:00:00",
+      "type": "任务"
+    },
+    {
+      "id": 1,
+      "title": "用户小李取消了订单",
+      "content": "用户小李已取消",
+      "create_time": "2023-07-19 19:00:00",
+      "type": "通知"
+    },
+    {
+      "id": 1,
+      "title": "用户小张的意见反馈",
+      "content": "商品存在质量问题",
+      "create_time": "2023-07-19 19:00:00",
+      "type": "反馈"
+    }
+  ]
 }

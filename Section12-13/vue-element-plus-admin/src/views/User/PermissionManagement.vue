@@ -4,7 +4,6 @@ import { Table } from '@/components/Table'
 import { getUserListApi } from '@/api/login'
 import { UserType } from '@/api/login/types'
 import { ref, h } from 'vue'
-import { ElButton, ElDialog, ElOption, ElSelect } from 'element-plus'
 import { TableColumn } from '@/types/table'
 
 interface Params {
