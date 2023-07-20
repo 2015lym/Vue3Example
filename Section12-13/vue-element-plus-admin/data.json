@@ -98,16 +98,6 @@
       "price": 20,
       "number": 221,
       "description": "商品描述商品描述商品描述"
-    },
-    {
-      "title": "a啊啊啊",
-      "post": "包邮",
-      "create_time": "2023-07-20 01:59:29",
-      "author": "张三",
-      "description": "顶顶顶顶",
-      "price": 3,
-      "number": 240,
-      "id": 9
     }
   ],
   "orders": [

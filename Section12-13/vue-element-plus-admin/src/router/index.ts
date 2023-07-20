@@ -189,7 +189,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
     path: '/Message',
     component: Layout,
-    redirect: '/Message/MessageManagement',
+    redirect: '/Message/MessageSearch',
     name: 'Message',
     meta: {
       title: '消息管理',
@@ -198,11 +198,11 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'MessageManagement',
-        component: () => import('@/views/Message/MessageManagement.vue'),
-        name: 'MessageManagement',
+        path: 'MessageSearch',
+        component: () => import('@/views/Message/MessageSearch.vue'),
+        name: 'MessageSearch',
         meta: {
-          title: '消息分类管理',
+          title: '消息分类查询',
           noCache: true
         }
       },
