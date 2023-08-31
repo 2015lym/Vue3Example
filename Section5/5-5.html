@@ -2,47 +2,75 @@
 <html lang="en">
 
 <head>
+  <!-- 设置文档头部信息 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- 引入 Vue.js -->
   <script src="https://unpkg.com/vue@next"></script>
+
+  <!-- 设置页面标题 -->
   <title>购物车Demo</title>
 </head>
 
 <body>
+  <!-- Vue 应用的根元素 -->
   <div id="app">
+    <!-- 商品列表 -->
     <h1>商品列表</h1>
     <ul>
+      <!-- 使用 v-for 遍历 products 数组 -->
       <li v-for="(product, index) in products" :key="index">
+        <!-- 显示商品名和价格 -->
         {{ product.name }} - {{ product.price }}元
+
+        <!-- 点击按钮触发 addToCart 方法，传入当前索引 -->
         <button @click="addToCart(index)">加入购物车</button>
       </li>
     </ul>
 
+    <!-- 购物车 -->
     <h1>购物车</h1>
     <ul>
+      <!-- 使用 v-for 遍历 cart 数组 -->
       <li v-for="(item, index) in cart" :key="index">
+        <!-- 显示购物车中商品名、价格、数量 -->
         {{ item.name }} - {{ item.price }}元 x {{ item.count }}
+
+        <!-- 点击按钮触发 removeProduct 方法，传入当前索引 -->
         <button @click="removeProduct(index)">移除商品</button>
       </li>
     </ul>
+
+    <!-- 显示购物车总价 -->
     <div>总价：{{ totalPrice }}元</div>
   </div>
 
+  <!-- Vue.js 代码块 -->
   <script>
+    // 从 Vue 中解构出 createApp 函数
     const { createApp } = Vue;
+
+    // 创建 Vue 应用实例
     createApp({
+      // data() 返回数据对象
       data() {
         return {
+          // 商品列表
           products: [
             { name: "手机", price: 5999 },
             { name: "平板", price: 7999 },
             { name: "电脑", price: 9999 },
           ],
+          // 购物车
           cart: []
         }
       },
+
+      // methods 包含自定义方法
       methods: {
+        // 添加商品到购物车
         addToCart(index) {
           const product = this.products[index];
           const item = this.cart.find((item) => item.name === product.name);
@@ -52,30 +80,38 @@
             this.cart.push({ ...product, count: 1 });
           }
         },
+
+        // 从购物车中移除商品
         removeProduct(index) {
           var count = --this.cart[index].count;
           if (count == 0) {
-            this.cart.splice(index, 1)
+            this.cart.splice(index, 1);
           }
         }
       },
+
+      // computed 包含计算属性
       computed: {
+        // 计算购物车总价
         totalPrice() {
           return this.cart.reduce((total, item) => {
             return total + item.price * item.count;
           }, 0);
         },
       },
+
+      // watch 用于监听数据变化
       watch: {
-        count: {
+        // 监听购物车中商品数量变化
+        cart: {
           handler(newVal, oldVal) {
             console.log("cart changed", newVal);
           },
-          deep: true,
-          immediate: true
+          deep: true,     // 深度监听
+          immediate: true // 立即执行回调
         }
       }
-    }).mount("#app");
+    }).mount("#app"); // 将实例挂载到 id 为 'app' 的 DOM 元素
   </script>
 </body>
 

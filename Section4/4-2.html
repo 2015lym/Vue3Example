@@ -11,9 +11,12 @@
 
 <body>
   <div id="app">
+    <!-- 把fontSize的值传递给font-size -->
     <div :style="{'font-size': fontSize}">Style绑定对象1</div>
+    <!-- 传递整个styleObject -->
     <div :style="styleObject">Style绑定对象2</div>
 
+    <!-- 同时绑定styleObject和backColor -->
     <div :style="[styleObject, backColor]">Style绑定数组</div>
   </div>
 

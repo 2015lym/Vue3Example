@@ -11,9 +11,13 @@
 
 <body>
   <div id="app">
+    <!-- 通过isRed判断是否绑定red-div -->
     <div :class="{'red-div': isRed}">Class绑定对象</div>
+    <!-- 绑定classObject中的Class -->
     <div :class="classObject">Class绑定计算属性</div>
+    <!-- 同时绑定redClass和whiteClass -->
     <div :class="[redClass, whiteClass]">Class绑定数组1</div>
+    <!-- 加判断的混合绑定 -->
     <div :class="[{'bold-text': isBold}, redClass]">Class绑定数组2</div>
   </div>
 

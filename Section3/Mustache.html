@@ -12,8 +12,10 @@
   <span>我的名字: {{name}}</span>
 </div>
 <script>
+  // 从Vue中解构出createApp函数
   const { createApp } = Vue
   const app = createApp({
+    // data函数，用于定义应用中的数据
     data() {
       return {
         name: '张三',
